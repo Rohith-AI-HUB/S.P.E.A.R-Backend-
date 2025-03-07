@@ -10,7 +10,14 @@ require("dotenv").config();
 const app = express();
 const PORT = 5000;
 
-app.use(cors());
+// CORS Configuration - Allow requests only from your Vercel frontend
+const corsOptions = {
+  origin: "https://spear-frontend.vercel.app",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Allow cookies/auth headers if needed
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 const openai = new OpenAI({
